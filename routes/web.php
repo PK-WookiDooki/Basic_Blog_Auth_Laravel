@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Auth::routes([
+    // 'register' => false
+]);
+
+Route::middleware('auth')->prefix('dashboard')->group(function(){
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/users_list', [HomeController::class, 'users'])->name('users');
+    Route::get("/user_blog", [HomeController::class, 'userBlog'])->name('userBlog');
+    Route::resource('blog', BlogController::class);
 });

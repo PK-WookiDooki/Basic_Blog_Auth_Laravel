@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Blog;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Blade::if('author', function(){
+            $blog = Blog::where("user_id", Auth::id())->get();
+            return $blog ? true : false;
+        });
     }
+
 }
