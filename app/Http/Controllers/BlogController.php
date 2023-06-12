@@ -22,7 +22,7 @@ class BlogController extends Controller
         })->when(request()->has("title"), function($query){
             $sortType = request()->title ?? 'asc';
             $query->orderBy('title', $sortType);
-        })->paginate(7)->withQueryString();
+        })->latest("id")->paginate(7)->withQueryString();
         return view('blog.index', compact('blogs'));
     }
 
@@ -39,9 +39,12 @@ class BlogController extends Controller
      */
     public function store(StoreBlogRequest $request)
     {
+        // return($request);
+
         $blog = Blog::create([
             'title' => $request->title,
             'description' => $request->description,
+            'category_id' => $request->category,
             'user_id' => Auth::id()
         ]);
         return redirect()->route('blog.index')->with(['message' => "Blog title (". $blog->title . ") has been created successfully!"]);
@@ -70,9 +73,14 @@ class BlogController extends Controller
      */
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
-        $blog->title = $request->title;
-        $blog->description = $request->description;
-        $blog->update();
+        // $blog->title = $request->title;
+        // $blog->description = $request->description;
+        // $blog->update();
+        $blog->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'category_id' => $request->category,
+        ]);
 
         return redirect()->route('blog.index')->with(['message' => "Your blog has been updated successfully!"] );
     }

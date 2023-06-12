@@ -71,6 +71,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="mt-3">
+                    {{ $users->onEachSide(1)->links() }}
+                </div>
             </div>
         </div>
     </div>

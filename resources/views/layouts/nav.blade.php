@@ -21,6 +21,15 @@
                 @auth
 
                     <li class="nav-item">
+                        <a href="{{ route('category.index') }}" class="nav-link"> <i class="bi bi-journal-text"></i>
+                            Category
+                            List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('category.create') }}" class="nav-link"> <i class="bi bi-card-text"></i> Create
+                            Category</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('blog.index') }}" class="nav-link"> <i class="bi bi-journal-text"></i> Blog
                             List</a>
                     </li>
@@ -62,7 +71,7 @@
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                <i class="bi bi-box-arrow-left"></i>  {{ __('Logout') }}
+                                <i class="bi bi-box-arrow-left"></i> {{ __('Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

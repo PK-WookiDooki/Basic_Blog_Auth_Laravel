@@ -23,7 +23,8 @@ class UpdateBlogRequest extends FormRequest
     {
         return [
             'title' => 'required|string|min:10|max:255',
-            'description' => "required|string|min:100"
+            'description' => "required|string|min:100",
+            'category' => 'required|exists:categories,id'
         ];
     }
 }

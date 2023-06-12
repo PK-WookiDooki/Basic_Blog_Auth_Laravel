@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,7 @@ Route::get('/', function () {
 });
 
 Auth::routes([
-    // 'register' => false
+    // 'category.show' => false
 ]);
 
 Route::middleware('auth')->prefix('dashboard')->group(function(){
@@ -29,4 +30,5 @@ Route::middleware('auth')->prefix('dashboard')->group(function(){
     Route::get('/users_list', [HomeController::class, 'users'])->name('users');
     Route::get("/user_blog", [HomeController::class, 'userBlog'])->name('userBlog');
     Route::resource('blog', BlogController::class);
+    Route::resource('category', CategoryController::class);
 });
