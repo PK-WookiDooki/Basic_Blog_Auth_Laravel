@@ -36,7 +36,7 @@ class HomeController extends Controller
     }
 
     public function userBlog(){
-        $blogs = Blog::where('user_id', Auth::id())->paginate();
+        $blogs = Blog::where('user_id', Auth::id())->paginate(7);
         return view('blog.userblog', compact('blogs'));
     }
 }

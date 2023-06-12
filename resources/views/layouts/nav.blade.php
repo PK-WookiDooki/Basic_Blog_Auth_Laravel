@@ -21,22 +21,15 @@
                 @auth
 
                     <li class="nav-item">
-                        <a href="{{ route('category.index') }}" class="nav-link"> <i class="bi bi-journal-text"></i>
+                        <a href="{{ route('category.index') }}" class="nav-link"> <i class="bi bi-tags"></i>
                             Category
                             List</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('category.create') }}" class="nav-link"> <i class="bi bi-card-text"></i> Create
-                            Category</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('blog.index') }}" class="nav-link"> <i class="bi bi-journal-text"></i> Blog
                             List</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('blog.create') }}" class="nav-link"> <i class="bi bi-card-text"></i> Create
-                            Blog</a>
-                    </li>
+
 
                     <li class=" nav-item">
                         <a href="{{ route('users') }}" class=" nav-link"> <i class="bi bi-people-fill"></i> User List</a>
@@ -67,6 +60,14 @@
 
                             <a href="{{ route('userBlog') }}" class=" dropdown-item"> <i class="bi bi-journal-text"></i> My
                                 Blogs</a>
+
+                            <a href="{{ route('category.create') }}" class="dropdown-item"> <i class="bi bi-tag"></i>
+                                Create
+                                Category</a>
+
+                            <a href="{{ route('blog.create') }}" class=" dropdown-item"> <i class="bi bi-card-text"></i>
+                                Create
+                                Blog</a>
 
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

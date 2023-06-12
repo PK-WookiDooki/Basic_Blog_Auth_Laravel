@@ -20,7 +20,7 @@
                             <th> # </th>
                             <th> Blog </th>
                             <th>Category</th>
-                            <th> Owner ID</th>
+                            <th> Author ID</th>
                             <th> Controls </th>
                             <th> Created At</th>
                             <th> Updated At</th>
