@@ -11,7 +11,8 @@
                         <tr>
                             <th> # </th>
                             <th> Profile </th>
-                            {{-- <th> Controls </th> --}}
+                            <th> Categories Count </th>
+                            <th> Blogs Count </th>
                             <th> Created At</th>
                             <th> Updated At</th>
                         </tr>
@@ -28,6 +29,8 @@
                                     <p class=" small text-black-50 mb-0"> {{ Str::limit($user->email, 30, '...') }}</p>
                                 </td>
 
+                                <td> {{ $user->categories->count() }} </td>
+                                <td> {{ $user->blogs->count() }}</td>
                                 {{-- <td>
                                     <div class=" btn-group ">
                                         <a class=" btn btn-sm btn-outline-dark" href="{{ route('blog.show', $blog->id) }}">

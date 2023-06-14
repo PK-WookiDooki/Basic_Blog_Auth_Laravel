@@ -8,6 +8,11 @@ use Illuminate\Auth\Access\Response;
 
 class BlogPolicy
 {
+    public function before(User $user) {
+        if($user->role === 'admin'){
+            return true;
+        }
+    }
     /**
      * Determine whether the user can view any models.
      */
@@ -37,7 +42,7 @@ class BlogPolicy
      */
     public function update(User $user, Blog $blog): bool
     {
-        //
+        return $user->id == $blog->user_id;
     }
 
     /**
@@ -45,7 +50,7 @@ class BlogPolicy
      */
     public function delete(User $user, Blog $blog): bool
     {
-        //
+        return $user->id == $blog->user_id;
     }
 
     /**

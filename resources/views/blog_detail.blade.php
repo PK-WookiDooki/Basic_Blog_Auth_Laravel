@@ -11,7 +11,7 @@
                     </div>
                     <p class="mb-0 text-black-50 "> {{ $blog->description }} </p>
                     <p><i> By {{ $blog->user->name }} </i></p>
-                    <a href="{{ route('blog.index') }}" class="btn btn-dark">Back</a>
+                    <a href="{{ route('index') }}" class="btn btn-dark">Back</a>
                 </div>
             </div>
         </div>
