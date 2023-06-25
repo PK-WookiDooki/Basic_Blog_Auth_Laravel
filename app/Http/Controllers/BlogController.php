@@ -6,8 +6,10 @@ use App\Models\Blog;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Models\User;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -17,9 +19,11 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::when(request()->has('keyword'), function($query){
-            $keyword = request()->keyword;
-            $query->where('title', "Like", "%".$keyword."%");
-            $query->orWhere("description", "Like", "%".$keyword."%");
+            $query->where(function(Builder $builder) {
+                $keyword = request()->keyword;
+                $builder->where('title', "Like", "%".$keyword."%");
+                $builder->orWhere("description", "Like", "%".$keyword."%");
+            });
         })->when(Auth::user()->role !== "admin", fn($query) => $query->where('user_id', Auth::id()))->when(request()->has("title"), function($query){
             $sortType = request()->title ?? 'asc';
             $query->orderBy('title', $sortType);
@@ -44,7 +48,9 @@ class BlogController extends Controller
 
         $blog = Blog::create([
             'title' => $request->title,
+            'slug' => Str::slug($request->title),
             'description' => $request->description,
+            'excerpt' => Str::words($request->description, 30, '...'),
             'category_id' => $request->category,
             'user_id' => Auth::id()
         ]);
@@ -89,7 +95,9 @@ class BlogController extends Controller
         $this->authorize('update', $blog); // using policies
         $blog->update([
             'title' => $request->title,
+            'slug' => Str::slug($request->title),
             'description' => $request->description,
+            'excerpt' => Str::words($request->description, 30, '...'),
             'category_id' => $request->category,
         ]);
         return redirect()->route('blog.index')->with(['message' => "Your blog has been updated successfully!"] );

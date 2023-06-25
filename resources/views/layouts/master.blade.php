@@ -22,8 +22,18 @@
     <div id="app" class=" min-vh-100 d-flex flex-column gap-3">
         @include('layouts.nav')
 
+
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                <div class="row d-flex flex-column-reverse flex-lg-row justify-content-center gap-3 gap-lg-0 gap-md-0">
+                    <div class="col-lg-8">
+                        @yield('content')
+                    </div>
+                    <div class="col-lg-4">
+                        @include('layouts.right-sidebar')
+                    </div>
+                </div>
+            </div>
         </main>
 
         <footer class="bg-dark py-5 text-center mt-auto">

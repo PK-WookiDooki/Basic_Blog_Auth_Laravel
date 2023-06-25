@@ -1,12 +1,18 @@
 @extends('layouts.master')
 
 @section('content')
-    @if (request()->has('keyword'))
+    @if (request()->has('keyword') && $category)
         <div class=" alert alert-info d-flex align-items-center justify-content-between ">
-            Showing result by search keyword '{{ request()->keyword }}'
+            Showing result by search keyword '{{ request()->keyword }}' and category type {{ $category->title }}
+            <a href="{{ route('index') }}"> <i class=" bi bi-x h2"></i> </a>
+        </div>
+    @elseif ($category)
+        <div class=" alert alert-info d-flex align-items-center justify-content-between ">
+            Showing result by category type '{{ $category->title }}'
             <a href="{{ route('index') }}"> <i class=" bi bi-x h2"></i> </a>
         </div>
     @endif
+
 
     @forelse ($blogs as $blog)
         <div class="col-12 shadow-sm mb-3">

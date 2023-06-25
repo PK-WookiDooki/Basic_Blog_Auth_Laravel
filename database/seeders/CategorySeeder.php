@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\DBAL\TimestampType;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 use function PHPSTORM_META\map;
 
@@ -23,6 +24,7 @@ class CategorySeeder extends Seeder
         foreach($categories as $category){
             $arr[] =([
                 'title' => $category,
+                'slug' => Str::slug($category),
                 'user_id' => User::where("role", 'admin')->get()->random()->id,
                 // 'user_id' =>
                 'created_at' => now(),

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -38,6 +39,7 @@ class CategoryController extends Controller
         // $this->authorize('create', Category::class);
         Category::create([
             'title' => $request->title,
+            'slug' => Str::slug($request->title),
             'user_id' => Auth::id(),
         ]);
         return redirect()->route('category.index');
@@ -81,6 +83,7 @@ class CategoryController extends Controller
         // $this->authorize('cat_update', $category);
         $category->update([
             'title' => $request->title,
+            'slug' => Str::slug($request->title),
         ]);
 
         return redirect()->route('category.index');
